@@ -1,0 +1,115 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>2026 美加墨世界杯投注清单</title>
+  <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Crect width='64' height='64' rx='12' fill='%23356c5b'/%3E%3Ccircle cx='32' cy='32' r='18' fill='%23faf9f5'/%3E%3Cpath d='M21 32h22M32 14c6 8 6 28 0 36M32 14c-6 8-6 28 0 36' stroke='%23356c5b' stroke-width='4' fill='none'/%3E%3C/svg%3E">
+  <link rel="stylesheet" href="./styles.css">
+</head>
+<body>
+  <header class="topbar">
+    <div>
+      <p class="eyebrow">UTC+8 · 本地可编辑看板</p>
+      <h1>2026 美加墨世界杯投注清单</h1>
+      <p class="subtitle">静态页面发布，浏览器本地保存；净盈亏、ROI、命中率由明细实时计算。</p>
+    </div>
+    <div class="top-actions" aria-label="页面操作">
+      <button id="exportJsonBtn" type="button">导出 JSON</button>
+      <button id="exportMdBtn" type="button">导出 Markdown</button>
+      <button id="resetBtn" type="button" class="secondary">恢复初始数据</button>
+    </div>
+  </header>
+
+  <main>
+    <section class="summary-band" aria-labelledby="summaryTitle">
+      <div class="section-heading">
+        <div>
+          <p class="eyebrow">战绩总览</p>
+          <h2 id="summaryTitle">按投注人列表展示</h2>
+        </div>
+        <div class="formula-note">
+          ✅ = 投入 × 赔率；❌ = -投入；🟰 / 🚫 = 0；⏳ 或空结果不计入已结算
+        </div>
+      </div>
+      <div id="playerSummary" class="player-list" aria-live="polite"></div>
+    </section>
+
+    <section class="control-band" aria-labelledby="controlTitle">
+      <div>
+        <p class="eyebrow">筛选与录入</p>
+        <h2 id="controlTitle">快速定位比赛</h2>
+      </div>
+      <div class="controls">
+        <label>
+          搜索
+          <input id="searchInput" type="search" placeholder="日期、阶段、对阵、投注人、选择">
+        </label>
+        <label>
+          投注人
+          <select id="bettorFilter">
+            <option value="">全部</option>
+          </select>
+        </label>
+        <label>
+          结果
+          <select id="resultFilter">
+            <option value="">全部</option>
+            <option value="✅">胜</option>
+            <option value="❌">负</option>
+            <option value="🟰">平退</option>
+            <option value="⏳">待开</option>
+            <option value="🚫">取消</option>
+            <option value="blank">未填写</option>
+          </select>
+        </label>
+        <label>
+          展开
+          <select id="phaseFilter">
+            <option value="">全部阶段</option>
+          </select>
+        </label>
+      </div>
+    </section>
+
+    <section class="table-band" aria-labelledby="matchesTitle">
+      <div class="section-heading">
+        <div>
+          <p class="eyebrow">投注明细</p>
+          <h2 id="matchesTitle">赛程与投注记录</h2>
+        </div>
+        <div id="visibleCount" class="count-pill">0 条</div>
+      </div>
+      <div id="matchesRoot" class="matches-root"></div>
+    </section>
+  </main>
+
+  <template id="dayTemplate">
+    <article class="day-block">
+      <button class="day-title" type="button" aria-expanded="true">
+        <span class="day-meta"></span>
+        <span class="day-total"></span>
+      </button>
+      <div class="table-scroll">
+        <table>
+          <thead>
+            <tr>
+              <th>时间</th>
+              <th>对阵</th>
+              <th>投注人</th>
+              <th>选择</th>
+              <th>赔率</th>
+              <th>投入</th>
+              <th>结果</th>
+              <th>净盈亏</th>
+            </tr>
+          </thead>
+          <tbody></tbody>
+        </table>
+      </div>
+    </article>
+  </template>
+
+  <script src="./app.js"></script>
+</body>
+</html>
