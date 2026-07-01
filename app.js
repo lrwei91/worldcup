@@ -290,6 +290,8 @@ function daySummaryText(rows) {
 
 function renderRow(row, visibleRows) {
   const tr = document.createElement("tr");
+  const hasBet = Boolean(row.bettor || row.pick || row.odds || row.stake || row.result);
+  tr.className = `${hasBet ? "bet-row" : "empty-row"} ${isSettled(row) ? "settled-row" : ""}`.trim();
   tr.append(cellText(row.time));
   tr.append(cellText(row.match));
   tr.append(cellInput(row, "bettor", "text", "", visibleRows));
